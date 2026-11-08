@@ -21,6 +21,9 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y git zip unzip openjdk-17-jdk python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
         pip3 install --user --upgrade buildozer cython
+
+    - name: Accept Android Licenses
+      run: |
         export PATH=$PATH:~/.local/bin
         yes | buildozer android update
 
