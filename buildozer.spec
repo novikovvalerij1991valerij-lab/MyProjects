@@ -5,6 +5,6 @@ package.domain = ru.novikov
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-requirements = python3,kivy==2.3.1,cryptography
+requirements = requirements = python3,kivy==2.3.1,cryptography
 orientation = portrait
 fullscreen = 0
