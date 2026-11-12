@@ -25,10 +25,9 @@ jobs:
 
     - name: Download Android SDK
       run: |
-        # Скачиваем старый, но рабочий SDK Tools
         wget https://dl.google.com/android/repository/tools_r25.2.5-linux.zip
+        mkdir -p ~/.buildozer/android/platform/android-sdk/
         unzip -o tools_r25.2.5-linux.zip -d ~/.buildozer/android/platform/android-sdk/
-        # Создаем папку и копируем sdkmanager
         mkdir -p ~/.buildozer/android/platform/android-sdk/tools/bin
         cp ~/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager ~/.buildozer/android/platform/android-sdk/tools/bin/ 2>/dev/null || true
 
