@@ -32,6 +32,14 @@ jobs:
     - name: Build with Buildozer
       run: |
         export PATH=$PATH:~/.local/bin
+        
+        # Создаем папку tools/bin и копируем туда sdkmanager, если он есть
+        mkdir -p ~/.buildozer/android/platform/android-sdk/tools/bin
+        if [ -f ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager ]; then
+          cp ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager ~/.buildozer/android/platform/android-sdk/tools/bin/
+          cp ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/avdmanager ~/.buildozer/android/platform/android-sdk/tools/bin/
+        fi
+        
         buildozer android debug
 
     - name: Upload APK
