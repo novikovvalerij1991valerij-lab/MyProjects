@@ -23,6 +23,15 @@ jobs:
         pip3 install --user --upgrade buildozer cython
         pip3 install --user kivy==2.3.1
 
+    - name: Download Android SDK
+      run: |
+        # Скачиваем старый, но рабочий SDK Tools
+        wget https://dl.google.com/android/repository/tools_r25.2.5-linux.zip
+        unzip -o tools_r25.2.5-linux.zip -d ~/.buildozer/android/platform/android-sdk/
+        # Создаем папку и копируем sdkmanager
+        mkdir -p ~/.buildozer/android/platform/android-sdk/tools/bin
+        cp ~/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager ~/.buildozer/android/platform/android-sdk/tools/bin/ 2>/dev/null || true
+
     - name: Accept Android Licenses
       run: |
         export PATH=$PATH:~/.local/bin
@@ -32,14 +41,6 @@ jobs:
     - name: Build with Buildozer
       run: |
         export PATH=$PATH:~/.local/bin
-        
-        # Создаем папку tools/bin и копируем туда sdkmanager, если он есть
-        mkdir -p ~/.buildozer/android/platform/android-sdk/tools/bin
-        if [ -f ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager ]; then
-          cp ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager ~/.buildozer/android/platform/android-sdk/tools/bin/
-          cp ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/avdmanager ~/.buildozer/android/platform/android-sdk/tools/bin/
-        fi
-        
         buildozer android debug
 
     - name: Upload APK
